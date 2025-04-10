@@ -29,7 +29,6 @@
 		};
 	</script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@latest/lib/p5.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/processing/p5.js-sound/lib/p5.sound.min.js"></script>
 </head>
 <body style="background: rgb(0, 0, 0);">
 
@@ -59,8 +58,20 @@ function setup() {
 	createCanvas(windowWidth, windowHeight)
 	background(0)
 	
+    // var SliderFillDefault = 128 // default value
+
+
 	SliderFill = createSlider(0, 255, 128, .1) // min, max, default, stepSize
 	SliderFill.position(width/2, 25)
+    SliderFill.input(()=>{
+        localStorage.setItem('SliderFill', SliderFill.value()) // store current value in localstorage
+    }) // change slider
+
+    if(localStorage.hasOwnProperty('SliderFill')){
+        var storedValue = localStorage.getItem('SliderFill')
+        SliderFill.value(storedValue) 
+    }
+
 }
 
 function draw() {
